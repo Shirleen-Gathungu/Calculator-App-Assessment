@@ -31,24 +31,28 @@ class CalculatorAppActivity : AppCompatActivity() {
         tvResult=findViewById(R.id.tvResult)
 
         btnAddOne.setOnClickListener {
-            return@setOnClickListener
+            val num1=etNumberOne.text.toString()
+            val num2=etNumberTwo.text.toString()
+
         }
         addition(num1 = Int.toString().toInt(), num2 = Int.toString().toInt())
 
 
         btnSubtract1.setOnClickListener {
-            etNumberOne
-            return@setOnClickListener
+            val num1=etNumberOne.text.toString()
+            val num2=etNumberTwo.text.toString()
         }
         subtraction(num1 = Int.toString().toInt(), num2 = Int.toString().toInt())
 
         btnModulus.setOnClickListener {
-        return@setOnClickListener
+            val num1=etNumberOne.text.toString()
+            val num2=etNumberTwo.text.toString()
         }
         modulus(num1 = Int.toString().toInt(),num2=Int.toString().toInt())
 
         btnDivide.setOnClickListener {
-
+            val num1=etNumberOne.text.toString()
+            val num2=etNumberTwo.text.toString()
             return@setOnClickListener
         }
         division(num1 = Int.toString().toInt(), num2 = Int.toString().toInt())
