@@ -53,7 +53,6 @@ class CalculatorAppActivity : AppCompatActivity() {
         btnDivide.setOnClickListener {
             val num1=etNumberOne.text.toString()
             val num2=etNumberTwo.text.toString()
-            return@setOnClickListener
         }
         division(num1 = Int.toString().toInt(), num2 = Int.toString().toInt())
 
@@ -61,25 +60,25 @@ class CalculatorAppActivity : AppCompatActivity() {
 
     private fun addition(num1: Int, num2: Int): Int {
         val add=num1+num2
-        tvResult.text=Result.toString()
+        tvResult.text=add.toString()
         return add
 
     }
 
      private fun subtraction(num1:Int, num2:Int):Int {
         val subtract=num1-num2
-        tvResult.text=Result.toString()
+        tvResult.text=subtract.toString()
         return subtract
 
     }
     private fun modulus(num1: Int, num2: Int): Int {
         val mod=num1%num2
-        tvResult.text = Result.toString()
+        tvResult.text = mod.toString()
         return mod
     }
     private fun division(num1: Int, num2: Int): Int {
         val divide=num1/num2
-        tvResult.text = Result.toString()
+        tvResult.text = divide.toString()
         return divide
 
     }
