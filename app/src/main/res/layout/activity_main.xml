@@ -10,7 +10,7 @@
         android:id="@+id/btnCalculatorApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Calculator App"
+        android:hint="@string/calculator_app"
         android:text="Calculator App"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
