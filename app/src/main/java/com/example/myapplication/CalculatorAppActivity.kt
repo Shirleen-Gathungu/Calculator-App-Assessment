@@ -2,84 +2,125 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.example.myapplication.databinding.ActivityCalculatorAppBinding
 import com.google.android.material.textfield.TextInputLayout
 
 class CalculatorAppActivity : AppCompatActivity() {
-    private lateinit var tilNumberOne:TextInputLayout
-    private lateinit var tilNumberTwo:TextInputLayout
-    private lateinit var etNumberOne:EditText
-    private lateinit var etNumberTwo:EditText
-    private lateinit var btnAddOne:EditText
-    private lateinit var btnSubtract1:EditText
-    private lateinit var btnModulus:Button
-    private lateinit var btnDivide:Button
-    private lateinit var tvResult:TextView
+    lateinit var binding: ActivityCalculatorAppBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calculator_app)
-        tilNumberOne=findViewById(R.id.tilNumberOne)
-        tilNumberTwo=findViewById(R.id.tilNumberTwo)
-        etNumberOne=findViewById(R.id.etNumberOne)
-        etNumberTwo=findViewById(R.id.etNumberTwo)
-        btnAddOne=findViewById(R.id.btnAddOne)
-        btnSubtract1=findViewById(R.id.btnSubtract1)
-        btnModulus=findViewById(R.id.btnModulus)
-        btnDivide=findViewById(R.id.btnDivide)
-        tvResult=findViewById(R.id.tvResult)
+        binding = ActivityCalculatorAppBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        handleClicks()
+    }
+        fun handleClicks() {
+            binding.btnAddOne.setOnClickListener {
+                addition(obtainInputs())
 
-        btnAddOne.setOnClickListener {
-            val num1=etNumberOne.text.toString()
-            val num2=etNumberTwo.text.toString()
+            }
+            binding.btnSubtract1.setOnClickListener {
+                subtraction(obtainInputs())
+
+            }
+            binding.btnModulus.setOnClickListener {
+                modulus(obtainInputs())
+
+            }
+            binding.btnDivide.setOnClickListener {
+                division(obtainInputs())
+
+            }
 
         }
-        addition(num1 = Int.toString().toInt(), num2 = Int.toString().toInt())
 
+        //        binding.btnAddOne.setOnClickListener {
+//            val num1=binding.etNumberOne.text.toString()
+//            val num2=binding.etNumberTwo.text.toString()
+//
+//        }
+//        addition(num1 = Int.toString().toInt(), num2 = Int.toString().toInt())
+//
+//
+//        binding.btnSubtract1.setOnClickListener {
+//            val num1=binding.etNumberOne.text.toString()
+//            val num2=binding.etNumberTwo.text.toString()
+//        }
+//        subtraction(num1 = Int.toString().toInt(), num2 = Int.toString().toInt())
+//
+//        binding.btnModulus.setOnClickListener {
+//            val num1=binding.etNumberOne.text.toString()
+//            val num2=binding.etNumberTwo.text.toString()
+//        }
+//        modulus(num1 = Int.toString().toInt(),num2=Int.toString().toInt())
+//
+//        binding.btnDivide.setOnClickListener {
+//            val num1=binding.etNumberOne.text.toString()
+//            val num2=binding.etNumberTwo.text.toString()
+//        }
+//        division(num1 = Int.toString().toInt(), num2 = Int.toString().toInt())
+//
+//    }
+        data class Inputs(var num1: Double, var num2: Double)
 
-        btnSubtract1.setOnClickListener {
-            val num1=etNumberOne.text.toString()
-            val num2=etNumberTwo.text.toString()
+        fun obtainInputs(): Inputs? {
+            binding.tilNumberOne.error=null
+            binding.tilNumberTwo.error=null
+            val num1 = binding.etNumberOne.text.toString()
+            val num2 = binding.etNumberTwo.text.toString()
+            var error = false
+
+            if (num1.isBlank()) {
+                binding.tilNumberOne.error = "Number 1 required"
+                error = true
+            }
+            if (num2.isBlank()) {
+                binding.tilNumberTwo.error = "Number 2 is required"
+                error = true
+            }
+            if (!error) {
+                return Inputs(num1.toDouble(),num2.toDouble())
+            }
+            return null
         }
-        subtraction(num1 = Int.toString().toInt(), num2 = Int.toString().toInt())
+        fun addition(inputs:Inputs?) {
+            if(inputs!=null) {
+                displayResult(inputs.num1 + inputs.num2)
 
-        btnModulus.setOnClickListener {
-            val num1=etNumberOne.text.toString()
-            val num2=etNumberTwo.text.toString()
+            }
         }
-        modulus(num1 = Int.toString().toInt(),num2=Int.toString().toInt())
 
-        btnDivide.setOnClickListener {
-            val num1=etNumberOne.text.toString()
-            val num2=etNumberTwo.text.toString()
+        fun subtraction(inputs:Inputs?) {
+            if(inputs!=null) {
+                displayResult(inputs.num1 - inputs.num2)
+
+            }
+
+
         }
-        division(num1 = Int.toString().toInt(), num2 = Int.toString().toInt())
 
+        fun modulus(inputs:Inputs?) {
+            if(inputs!=null) {
+                displayResult(inputs.num1 % inputs.num2)
+
+            }
+
+        }
+
+        fun division(inputs:Inputs?) {
+            if(inputs!=null) {
+                displayResult(inputs.num1 / inputs.num2)
+
+            }
+
+        }
+    fun displayResult(result:Double){
+        binding.tvResult.text=result.toString()
     }
 
-    private fun addition(num1: Int, num2: Int): Int {
-        val add=num1+num2
-        tvResult.text=add.toString()
-        return add
-
-    }
-
-     private fun subtraction(num1:Int, num2:Int):Int {
-        val subtract=num1-num2
-        tvResult.text=subtract.toString()
-        return subtract
-
-    }
-    private fun modulus(num1: Int, num2: Int): Int {
-        val mod=num1%num2
-        tvResult.text = mod.toString()
-        return mod
-    }
-    private fun division(num1: Int, num2: Int): Int {
-        val divide=num1/num2
-        tvResult.text = divide.toString()
-        return divide
-
-    }
 }
+
